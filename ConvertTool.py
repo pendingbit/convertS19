@@ -3,7 +3,11 @@ from crc import crc
 from split import split,G_Dict
 
 
+<<<<<<< HEAD
 #master modify define the start and end address
+=======
+#test modify define the start and end address
+>>>>>>> testbranch
 G_Start_Address = 0x0000E000
 G_File_Lenght = 0x00032000
 G_End_Address = G_Start_Address + G_File_Lenght
