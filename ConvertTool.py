@@ -8,7 +8,11 @@ G_Start_Address = 0x0000E000
 G_File_Lenght = 0x00032000
 G_End_Address = G_Start_Address + G_File_Lenght
 
+#define compatibilty value
 G_COMPATIBILTY = 0x0000A100
+
+#add this test comment in testbranch
+
 G_CRC_START = G_Start_Address
 G_CRC_END = G_End_Address - 4
 
