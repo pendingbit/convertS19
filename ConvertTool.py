@@ -12,6 +12,7 @@ G_COMPATIBILTY = 0x0000A100
 G_CRC_START = G_Start_Address
 G_CRC_END = G_End_Address - 4
 
+
 G_Data = []
 G_LineStr = []
 Next_Address = G_Start_Address
