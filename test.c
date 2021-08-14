@@ -4,3 +4,4 @@ test for git reset
 test for git reset1
 flsjf;laje teset
 test git reset soft
+test	:
