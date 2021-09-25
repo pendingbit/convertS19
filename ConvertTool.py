@@ -3,9 +3,6 @@ from crc import crc
 from split import split,G_Dict
 
 
-#master modify define the start and end address
-=======
-#test modify define the start and end address
 
 G_Start_Address = 0x0000E000
 G_File_Lenght = 0x00032000
