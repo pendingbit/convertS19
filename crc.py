@@ -1,4 +1,5 @@
 
+#crc function
 def S19_Crc16(pdata, DataLen, InitVal):
     i = 0
     index = 0
