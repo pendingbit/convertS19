@@ -3,9 +3,9 @@ from crc import crc
 from split import split,G_Dict
 
 
-
-G_Start_Address = 0x0000E000
-G_File_Lenght = 0x00032000
+#flash range 
+G_Start_Address = 0x00010000
+G_File_Lenght = 0x00070000
 G_End_Address = G_Start_Address + G_File_Lenght
 
 #define compatibilty value
@@ -41,7 +41,7 @@ ll = infile.readline()
 while ll != '':
     count += 1
     SpitFlag = split(ll)
-    #print('ll =',ll)
+    print('ll =',ll)
     if SpitFlag == 0:
         pass
     else: 
@@ -84,7 +84,6 @@ G_Data[-3] = 0x00
 CRC16 = crc(G_Data, G_File_Lenght-4, 0xffff)
 G_Data[-1] = CRC16&0x00ff
 G_Data[-2] = (CRC16&0xff00)>>8
-
 
 for i in range(int(G_File_Lenght/32)):
     linetype = 'S224'
