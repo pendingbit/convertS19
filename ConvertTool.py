@@ -3,9 +3,14 @@ from crc import crc
 from split import split,G_Dict
 
 
-#flash range 
+#flash range for 512k k144 mcu
 G_Start_Address = 0x00010000
 G_File_Lenght = 0x00070000
+
+#flash range for 256k 7811 mcu
+#G_Start_Address = 0x0800e000
+#G_File_Lenght = 0x00032000
+
 G_End_Address = G_Start_Address + G_File_Lenght
 
 #define compatibilty value
