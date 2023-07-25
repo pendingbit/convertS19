@@ -3,21 +3,43 @@ from crc import crc
 from split import split,G_Dict
 
 
-#flash range for 512k k144 mcu
-G_Start_Address = 0x00010000
-G_File_Lenght = 0x00070000
+'''
+        #####
+    config start
+        ####
+'''
+info = '''
+    Target partition:
+        1: S32k144 MCU 64K-boot + 448K-app
+        2: AC7811 MCU 64K-boot + 192K-app
+        
+    Please input your selection:'''
 
-#flash range for 256k 7811 mcu
-#G_Start_Address = 0x0800e000
-#G_File_Lenght = 0x00032000
+select = input(info)
 
-G_End_Address = G_Start_Address + G_File_Lenght
+if select == "1":
+    #flash range for k144 mcu 512k(64k+448k)
+    G_Start_Address = 0x00010000
+    G_File_Lenght = 0x00070000
+elif select == "2":
+    #flash range for 7811 mcu 256k(64k+192k) 
+    G_Start_Address = 0x00010000
+    G_File_Lenght = 0x00030000
+else:
+    print("invalid input! Please restart")
+    exit()
 
 #define compatibilty value
 G_COMPATIBILTY = 0x0000A100
 
-#add this test comment in testbranch
+'''
+        #####
+    config end
+        ####
+'''
 
+
+G_End_Address = G_Start_Address + G_File_Lenght
 G_CRC_START = G_Start_Address
 G_CRC_END = G_End_Address - 4
 
