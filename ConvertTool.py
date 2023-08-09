@@ -23,7 +23,7 @@ if select == "1":
     G_File_Lenght = 0x00070000
 elif select == "2":
     #flash range for 7811 mcu 256k(64k+192k) 
-    G_Start_Address = 0x00010000
+    G_Start_Address = 0x08010000
     G_File_Lenght = 0x00030000
 else:
     print("invalid input! Please restart")
@@ -113,11 +113,13 @@ G_Data[-1] = CRC16&0x00ff
 G_Data[-2] = (CRC16&0xff00)>>8
 
 for i in range(int(G_File_Lenght/32)):
-    linetype = 'S224'
+    linetype = 'S324'
     tempaddr = i*32 + G_Start_Address
-    Addr0 = (tempaddr & 0x00ff0000) >> 16
-    Addr1 = (tempaddr & 0x0000ff00) >> 8
-    Addr2 = tempaddr & 0x000000ff
+    Addr0 = (tempaddr & 0xff000000) >> 24
+    Addr1 = (tempaddr & 0x00ff0000) >> 16
+    Addr2 = (tempaddr & 0x0000ff00) >> 8
+    Addr3 = tempaddr & 0x000000ff
+
     tempdata = G_Data[i*32:i*32+32]
     checksum = 0
 
@@ -125,6 +127,7 @@ for i in range(int(G_File_Lenght/32)):
     Linestring += str(hex(Addr0))[2:].zfill(2).upper()
     Linestring += str(hex(Addr1))[2:].zfill(2).upper()
     Linestring += str(hex(Addr2))[2:].zfill(2).upper()
+    Linestring += str(hex(Addr3))[2:].zfill(2).upper()
 
     for j in range(len(tempdata)):
         checksum += tempdata[j]
