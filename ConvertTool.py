@@ -113,7 +113,7 @@ G_Data[-1] = CRC16&0x00ff
 G_Data[-2] = (CRC16&0xff00)>>8
 
 for i in range(int(G_File_Lenght/32)):
-    linetype = 'S324'
+    linetype = 'S325'
     tempaddr = i*32 + G_Start_Address
     Addr0 = (tempaddr & 0xff000000) >> 24
     Addr1 = (tempaddr & 0x00ff0000) >> 16
@@ -133,7 +133,7 @@ for i in range(int(G_File_Lenght/32)):
         checksum += tempdata[j]
         Linestring += str(hex(tempdata[j]))[2:].zfill(2).upper()
 
-    checksum = 255 - (checksum + 36 + Addr0 + Addr1 + Addr2 + Addr3)&0xff
+    checksum = 255 - (checksum + 37 + Addr0 + Addr1 + Addr2 + Addr3)&0xff
     Linestring += str(hex(checksum))[2:].zfill(2).upper()
     Linestring += '\n'
     G_LineStr.append(Linestring)
