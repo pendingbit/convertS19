@@ -133,7 +133,7 @@ for i in range(int(G_File_Lenght/32)):
         checksum += tempdata[j]
         Linestring += str(hex(tempdata[j]))[2:].zfill(2).upper()
 
-    checksum = 255 - (checksum + 36 + Addr0 + Addr1 + Addr2)&0xff
+    checksum = 255 - (checksum + 36 + Addr0 + Addr1 + Addr2 + Addr3)&0xff
     Linestring += str(hex(checksum))[2:].zfill(2).upper()
     Linestring += '\n'
     G_LineStr.append(Linestring)
