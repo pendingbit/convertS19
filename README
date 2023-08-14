@@ -1,0 +1,11 @@
+This is a given tool for converting s19 file. 
+There are two main targets. 
+One is filling 0xFF byte to blank space from start to end. 
+Second is calculating CRC16 and put it at last 4 byte.
+If you work with SAIC Bootload Specification, this tool is not bad.
+
+
+
+Auther Joey
+E-mail  pending_bit@outlook.com 
+Wechat  Winner_Pending
