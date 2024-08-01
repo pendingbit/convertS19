@@ -1,8 +1,8 @@
 #coding=utf-8 
 from crc import crc
 from split import split,G_Dict
-
-
+import os
+import glob
 '''
         #####
     config start
@@ -15,8 +15,10 @@ info = '''
         
     Please input your selection:'''
 
-select = input(info)
+#select = input(info)
 
+
+select = "1"
 if select == "1":
     #flash range for k144 mcu 512k(64k+448k)
     G_Start_Address = 0x00010000
@@ -49,13 +51,27 @@ G_LineStr = []
 Next_Address = G_Start_Address
 
 
-OriginFile = input("Enter S19 file name:")
-temp = OriginFile.find('.')
-while (temp == -1):
-    print("Invalid file name~ Please input again~\r\n")
-    OriginFile = input("Enter S19 file name:")
-    temp = OriginFile.find('.')
+#OriginFile = input("Enter S19 file name:")
+#temp = OriginFile.find('.')
+#while (temp == -1):
+#    print("Invalid file name~ Please input again~\r\n")
+#    OriginFile = input("Enter S19 file name:")
+#    temp = OriginFile.find('.')
 
+current_path =  os.getcwd()
+target_file = glob.glob(os.path.join(current_path, '**', '*.s19'), recursive=True)
+
+print(target_file)
+if len(target_file) == 0:
+    print("No target file, Please add one")
+    exit()
+elif len(target_file) > 1:
+    print("Too many target file, Please remove others")
+    exit()
+
+
+OriginFile = os.path.basename(target_file[0])
+temp = OriginFile.find('.')
 NewFile = 'Converted_' + OriginFile[:temp] + '.s19'
 print('Source file name is : ',OriginFile)
 print('New source file name is : ',NewFile)
