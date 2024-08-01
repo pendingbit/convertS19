@@ -17,7 +17,6 @@ info = '''
 
 #select = input(info)
 
-
 select = "1"
 if select == "1":
     #flash range for k144 mcu 512k(64k+448k)
@@ -76,6 +75,8 @@ NewFile = 'Converted_' + OriginFile[:temp] + '.s19'
 print('Source file name is : ',OriginFile)
 print('New source file name is : ',NewFile)
 
+print(f"APP Start Address = {hex(G_Start_Address)} \nAPP File Lenght = {hex(G_File_Lenght)} \nAPP END Address = {hex(G_Start_Address+G_File_Lenght)}")
+
 infile = open(OriginFile, "r")
 outfile = open(NewFile, "w+")
 count = 0
@@ -84,7 +85,7 @@ ll = infile.readline()
 while ll != '':
     count += 1
     SpitFlag = split(ll)
-    print('ll =',ll)
+    #print('ll =',ll)
     if SpitFlag == 0:
         pass
     else: 
@@ -158,6 +159,7 @@ str_s19 = ''.join(G_LineStr)
 outfile.writelines(str_s19)
 outfile.flush()
 outfile.close()
+print("######\nConvert Target Successful######")
 
 
 
