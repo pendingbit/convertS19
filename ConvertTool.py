@@ -10,9 +10,9 @@ import glob
         ####
 '''
 
-#flash range for 7811 mcu 256k(64k+192k) 
-G_Start_Address = 0x08010000
-G_File_Lenght = 0x00030000
+#flash range for s32k144 mcu 512k(64k+448k) 
+G_Start_Address = 0x00010000
+G_File_Lenght = 0x00070000
 
 #define compatibilty value
 G_COMPATIBILTY = 0x0000A100
@@ -26,7 +26,7 @@ G_LineStr = []
 Next_Address = G_Start_Address
 
 print("")
-print(f"Start convert for EH32 Project with AC7811 MCU...\nAPP Start Address = {hex(G_Start_Address)} \nAPP File Lenght = {hex(G_File_Lenght)} \nAPP END Address = {hex(G_End_Address)}")
+print(f"Start convert for EH32 Project with S32K144 MCU...\nAPP Start Address = {hex(G_Start_Address)} \nAPP File Lenght = {hex(G_File_Lenght)} \nAPP END Address = {hex(G_End_Address)}")
 
 '''
         #####
