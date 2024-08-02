@@ -3,35 +3,30 @@ from crc import crc
 from split import split,G_Dict
 import os
 import glob
+
 '''
         #####
     config start
         ####
 '''
-info = '''
-    Target partition:
-        1: S32k144 MCU 64K-boot + 448K-app
-        2: AC7811 MCU 64K-boot + 192K-app
-        
-    Please input your selection:'''
 
-#select = input(info)
-
-select = "1"
-if select == "1":
-    #flash range for k144 mcu 512k(64k+448k)
-    G_Start_Address = 0x00010000
-    G_File_Lenght = 0x00070000
-elif select == "2":
-    #flash range for 7811 mcu 256k(64k+192k) 
-    G_Start_Address = 0x08010000
-    G_File_Lenght = 0x00030000
-else:
-    print("invalid input! Please restart")
-    exit()
+#flash range for 7811 mcu 256k(64k+192k) 
+G_Start_Address = 0x08010000
+G_File_Lenght = 0x00030000
 
 #define compatibilty value
 G_COMPATIBILTY = 0x0000A100
+
+G_End_Address = G_Start_Address + G_File_Lenght
+G_CRC_START = G_Start_Address
+G_CRC_END = G_End_Address - 4
+
+G_Data = []
+G_LineStr = []
+Next_Address = G_Start_Address
+
+print("")
+print(f"Start convert for EH32 Project with AC7811 MCU...\nAPP Start Address = {hex(G_Start_Address)} \nAPP File Lenght = {hex(G_File_Lenght)} \nAPP END Address = {hex(G_End_Address)}")
 
 '''
         #####
@@ -39,28 +34,10 @@ G_COMPATIBILTY = 0x0000A100
         ####
 '''
 
-
-G_End_Address = G_Start_Address + G_File_Lenght
-G_CRC_START = G_Start_Address
-G_CRC_END = G_End_Address - 4
-
-
-G_Data = []
-G_LineStr = []
-Next_Address = G_Start_Address
-
-
-#OriginFile = input("Enter S19 file name:")
-#temp = OriginFile.find('.')
-#while (temp == -1):
-#    print("Invalid file name~ Please input again~\r\n")
-#    OriginFile = input("Enter S19 file name:")
-#    temp = OriginFile.find('.')
-
+#Get the target file name
 current_path =  os.getcwd()
 target_file = glob.glob(os.path.join(current_path, '**', '*.s19'), recursive=True)
 
-print(target_file)
 if len(target_file) == 0:
     print("No target file, Please add one")
     exit()
@@ -68,15 +45,14 @@ elif len(target_file) > 1:
     print("Too many target file, Please remove others")
     exit()
 
-
 OriginFile = os.path.basename(target_file[0])
 temp = OriginFile.find('.')
 NewFile = 'Converted_' + OriginFile[:temp] + '.s19'
 print('Source file name is : ',OriginFile)
 print('New source file name is : ',NewFile)
 
-print(f"APP Start Address = {hex(G_Start_Address)} \nAPP File Lenght = {hex(G_File_Lenght)} \nAPP END Address = {hex(G_Start_Address+G_File_Lenght)}")
 
+#open target file and convert file
 infile = open(OriginFile, "r")
 outfile = open(NewFile, "w+")
 count = 0
@@ -85,7 +61,6 @@ ll = infile.readline()
 while ll != '':
     count += 1
     SpitFlag = split(ll)
-    #print('ll =',ll)
     if SpitFlag == 0:
         pass
     else: 
@@ -159,7 +134,7 @@ str_s19 = ''.join(G_LineStr)
 outfile.writelines(str_s19)
 outfile.flush()
 outfile.close()
-print("######\nConvert Target Successful######")
+print("######\nConvert Target Successful\n######")
 
 
 
