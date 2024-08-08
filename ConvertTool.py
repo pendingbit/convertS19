@@ -36,7 +36,7 @@ print(f"Start convert for EH32 Project with S32K144 MCU...\nAPP Start Address = 
 
 #Get the target file name
 current_path =  os.getcwd()
-target_file = glob.glob(os.path.join(current_path, '**', '*.s19'), recursive=True)
+target_file = glob.glob(os.path.join(current_path, '**', '*.srec'), recursive=True)
 
 if len(target_file) == 0:
     print("No target file, Please add one")
