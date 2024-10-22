@@ -1,6 +1,7 @@
 #coding=utf-8 
 from crc import crc
 from split import split,G_Dict
+from time import sleep
 
 
 '''
@@ -26,7 +27,10 @@ elif select == "2":
     G_Start_Address = 0x08010000
     G_File_Lenght = 0x00030000
 else:
-    print("invalid input! Please restart")
+    print("#############################")
+    print("Invalid Input! Please Restart")
+    print("#############################")
+    sleep(3)
     exit()
 
 #define compatibilty value
@@ -142,6 +146,9 @@ str_s19 = ''.join(G_LineStr)
 outfile.writelines(str_s19)
 outfile.flush()
 outfile.close()
+print("Convert Success!!!")
+sleep(5)
+exit()
 
 
 
